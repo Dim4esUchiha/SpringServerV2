@@ -1,4 +1,4 @@
-package org.dim4es.springserver.controllers;
+package org.dim4es.springserver.web.controller;
 
 import org.dim4es.springserver.models.Chat;
 import org.dim4es.springserver.services.ChatService;

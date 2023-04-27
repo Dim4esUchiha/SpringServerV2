@@ -1,8 +1,6 @@
 package org.dim4es.springserver.services;
 
-import org.dim4es.springserver.models.Person;
 import org.dim4es.springserver.models.User;
-import org.dim4es.springserver.repositories.PersonRepository;
 import org.dim4es.springserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,5 +60,9 @@ public class UserService {
 
         userRepository.delete(optionalUser.get());
 
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByNickname(username);
     }
 }
