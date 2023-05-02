@@ -1,6 +1,5 @@
-package org.dim4es.springserver.controllers;
+package org.dim4es.springserver.web.controller;
 
-import org.dim4es.springserver.models.Person;
 import org.dim4es.springserver.models.User;
 import org.dim4es.springserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
