@@ -1,4 +1,4 @@
-package org.dim4es.springserver.security;
+package org.dim4es.springserver.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

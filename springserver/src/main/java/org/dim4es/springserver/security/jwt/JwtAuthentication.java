@@ -1,4 +1,4 @@
-package org.dim4es.springserver.security;
+package org.dim4es.springserver.security.jwt;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

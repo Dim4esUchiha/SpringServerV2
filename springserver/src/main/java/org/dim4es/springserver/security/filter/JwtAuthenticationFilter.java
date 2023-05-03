@@ -10,16 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+import static org.dim4es.springserver.services.Constants.AUTH_HEADER;
+import static org.dim4es.springserver.services.Constants.AUTH_HEADER_TOKEN_START;
 
-    private static final String AUTHORIZATION_HEADER = "Authorization";
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authHeaderValue = request.getHeader(AUTHORIZATION_HEADER);
-        if (authHeaderValue != null && authHeaderValue.startsWith("Bearer ")) {
+        String authHeaderValue = request.getHeader(AUTH_HEADER);
+        if (authHeaderValue != null && authHeaderValue.startsWith(AUTH_HEADER_TOKEN_START)) {
 
-            String tokenValue = authHeaderValue.substring(7);
+            String tokenValue = authHeaderValue.substring(AUTH_HEADER_TOKEN_START.length());
             SecurityContextHolder.getContext().setAuthentication(new JwtAuthenticationRequest(tokenValue));
         }
         filterChain.doFilter(request, response);

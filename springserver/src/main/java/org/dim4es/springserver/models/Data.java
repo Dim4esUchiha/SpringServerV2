@@ -4,11 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "data")
-public class Data {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Data extends AbstractEntity {
 
     @Column(name = "file_path")
     private String filePath;
@@ -26,14 +22,6 @@ public class Data {
     public Data(String filePath, String fileType) {
         this.filePath = filePath;
         this.fileType = fileType;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFilePath() {

@@ -7,12 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "message")
-public class Message {
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Message extends AbstractEntity {
 
     @Column(name = "date")
     private LocalDateTime date;
@@ -31,14 +26,6 @@ public class Message {
     public Message(LocalDateTime date, String info) {
         this.date = date;
         this.info = info;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public LocalDateTime getDate() {

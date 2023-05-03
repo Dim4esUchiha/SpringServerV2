@@ -1,15 +1,14 @@
 package org.dim4es.springserver.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
 @Table(name = "tag")
-public class Tag {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Tag extends AbstractEntity {
 
     @Column(name = "tag_name")
     private String tagName;
@@ -22,14 +21,6 @@ public class Tag {
 
     public Tag(String tagName) {
         this.tagName = tagName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTagName() {
