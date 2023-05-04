@@ -7,11 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "chat")
-public class Chat {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Chat extends AbstractEntity {
 
     @Column(name = "chat_name")
     private String chatName;
@@ -28,14 +24,6 @@ public class Chat {
 
     public Chat(String chatName) {
         this.chatName = chatName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getChatName() {

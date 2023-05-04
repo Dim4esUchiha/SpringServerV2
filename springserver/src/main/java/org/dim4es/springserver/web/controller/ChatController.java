@@ -20,7 +20,7 @@ public class ChatController {
 
 
     @GetMapping(path = "/{id}")
-    public List<Chat> getAllChats(@PathVariable("id") int id){
+    public List<Chat> getAllChats(@PathVariable("id") Long id){
         return chatService.getAllUserChats(id);
     }
 }

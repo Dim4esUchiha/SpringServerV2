@@ -25,7 +25,7 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public Person getPersonById(int id){
+    public Person getPersonById(Long id){
         Person person = personRepository.findById(id).orElse(null);
         if(person == null){
             return new Person("null", "null", -1);
@@ -33,7 +33,7 @@ public class PersonService {
         return person;
     }
 
-    public Person getPersonByUserId(int id){
+    public Person getPersonByUserId(Long id){
         User user = userRepository.findById(id).get();
         Person person = user.getPerson();
         if(person == null){
@@ -42,7 +42,7 @@ public class PersonService {
         return person;
     }
 
-    public void addPerson(Person person, int id){
+    public void addPerson(Person person, Long id){
         User user = userRepository.findById(id).get();
         user.setPerson(person);
         person.setUser(user);
@@ -50,7 +50,7 @@ public class PersonService {
         personRepository.save(person);
     }
 
-    public void updatePerson(Person person, int id){
+    public void updatePerson(Person person, Long id){
         User user = userRepository.findById(id).get();
 
 
@@ -74,7 +74,7 @@ public class PersonService {
         userRepository.save(user);
     }
 
-    public void deletePersonById(int id){
+    public void deletePersonById(Long id){
         Optional<Person> optionalPerson = personRepository.findById(id);
 
         if(!optionalPerson.isPresent()){

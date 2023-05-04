@@ -20,7 +20,7 @@ public class ChatService {
         this.userRepository = userRepository;
     }
 
-    public List<Chat> getAllUserChats(int id){
+    public List<Chat> getAllUserChats(Long id){
         return userRepository.findById(id).get().getChats();
     }
 }

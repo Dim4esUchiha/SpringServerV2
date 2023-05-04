@@ -7,11 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "person")
-public class Person {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Person extends AbstractEntity {
 
     @Column(name = "name")
     private String name;
@@ -50,15 +46,6 @@ public class Person {
         this.name = name;
         this.surName = surName;
         this.age = age;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -120,7 +107,7 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", surName='" + surName + '\'' +
                 ", age=" + age +

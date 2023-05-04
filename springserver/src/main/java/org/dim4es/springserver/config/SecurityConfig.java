@@ -1,12 +1,13 @@
 package org.dim4es.springserver.config;
 
-import org.dim4es.springserver.security.JwtService;
 import org.dim4es.springserver.security.UserDetailsServiceImpl;
 import org.dim4es.springserver.security.filter.JwtAuthenticationFilter;
+import org.dim4es.springserver.security.jwt.JwtService;
 import org.dim4es.springserver.security.provider.DbAuthenticationProvider;
 import org.dim4es.springserver.security.provider.JwtAuthenticationProvider;
 import org.dim4es.springserver.services.UserInfoDetailsService;
 import org.dim4es.springserver.services.UserService;
+import org.dim4es.springserver.services.token.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +16,14 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import java.util.List;
 
@@ -34,7 +38,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, LogoutHandler logoutHandler) throws Exception {
         http
                 .cors().disable()
                 .formLogin().disable()
@@ -44,7 +48,14 @@ public class SecurityConfig {
                 .antMatchers("/auth/**")
                 .permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().logout()
+                .logoutUrl("/auth/logout")
+                .addLogoutHandler(logoutHandler)
+                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
 
         return http.build();
     }
@@ -61,8 +72,9 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider jwtAuthenticationProvider(JwtService jwtService,
-                                                            UserDetailsService userDetailsService) {
-        return new JwtAuthenticationProvider(jwtService, userDetailsService);
+                                                            UserDetailsService userDetailsService,
+                                                            TokenService tokenService) {
+        return new JwtAuthenticationProvider(jwtService, userDetailsService, tokenService);
     }
 
     @Bean

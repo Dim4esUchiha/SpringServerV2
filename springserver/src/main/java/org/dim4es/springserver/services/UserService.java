@@ -21,7 +21,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(int id){
+    public User getUserById(Long id){
         return userRepository.findById(id).get();
     }
 
@@ -51,7 +51,7 @@ public class UserService {
         userRepository.save(optionalUser.get());
     }
 
-    public void deleteUserById(int id){
+    public void deleteUserById(Long id){
         Optional<User> optionalUser = userRepository.findById(id);
 
         if(!optionalUser.isPresent()){
