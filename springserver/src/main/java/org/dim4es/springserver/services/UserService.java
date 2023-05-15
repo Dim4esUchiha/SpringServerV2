@@ -3,6 +3,7 @@ package org.dim4es.springserver.services;
 import org.dim4es.springserver.models.City;
 import org.dim4es.springserver.models.User;
 import org.dim4es.springserver.repositories.UserRepository;
+import org.dim4es.springserver.services.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long id){
-        return userRepository.findById(id).get();
+    public User getUserById(Long id) throws EntityNotFoundException {
+        return userRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("Unable to find user by id = " + id));
     }
 
     public void addUser(User user){

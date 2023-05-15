@@ -3,6 +3,7 @@ package org.dim4es.springserver.web.controller;
 import org.dim4es.springserver.models.User;
 import org.dim4es.springserver.security.UserInfoDetails;
 import org.dim4es.springserver.services.UserService;
+import org.dim4es.springserver.services.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
-    public User getUser(@PathVariable("id") Long id){
+    public User getUser(@PathVariable("id") Long id) throws EntityNotFoundException {
         return userService.getUserById(id);
     }
 
