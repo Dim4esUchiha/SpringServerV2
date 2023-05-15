@@ -3,6 +3,7 @@ package org.dim4es.springserver.models;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,9 @@ public class User extends AbstractEntity {
 
     @Column(name = "last_location")
     private String lastLocation;
+
+    @Column(name = "last_location_update")
+    private Instant lastLocationUpdate;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
@@ -80,6 +84,14 @@ public class User extends AbstractEntity {
 
     public void setLastLocation(String lastLocation) {
         this.lastLocation = lastLocation;
+    }
+
+    public Instant getLastLocationUpdate() {
+        return lastLocationUpdate;
+    }
+
+    public void setLastLocationUpdate(Instant lastLocationUpdate) {
+        this.lastLocationUpdate = lastLocationUpdate;
     }
 
     public List<Chat> getChats() {
