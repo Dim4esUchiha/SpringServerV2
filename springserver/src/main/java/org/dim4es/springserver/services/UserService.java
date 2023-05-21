@@ -1,5 +1,6 @@
 package org.dim4es.springserver.services;
 
+import org.dim4es.springserver.models.City;
 import org.dim4es.springserver.models.User;
 import org.dim4es.springserver.repositories.UserRepository;
 import org.dim4es.springserver.services.exception.EntityNotFoundException;
@@ -67,4 +68,6 @@ public class UserService {
     public Optional<User> findByUsername(String username) {
         return userRepository.findByNickname(username);
     }
+
+    public List<User> findUsersByCity(City city) { return userRepository.findByCity(city);}
 }

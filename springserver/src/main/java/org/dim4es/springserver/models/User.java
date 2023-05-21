@@ -25,6 +25,10 @@ public class User extends AbstractEntity {
     @Column(name = "last_location_update")
     private Instant lastLocationUpdate;
 
+    @ManyToOne
+    @JoinColumn(name = "id_city", referencedColumnName = "id")
+    private City city;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Person person;
@@ -100,5 +104,13 @@ public class User extends AbstractEntity {
 
     public void setChats(List<Chat> chats) {
         this.chats = chats;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }
