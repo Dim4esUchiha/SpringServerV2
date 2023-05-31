@@ -33,7 +33,7 @@ public class User extends AbstractEntity {
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Person person;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_chat",
             joinColumns = @JoinColumn(name = "user_id"),
