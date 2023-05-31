@@ -35,6 +35,14 @@ public class UserChatController {
     @PostMapping(path = "/createChatForTwoUsers")
     public ResponseEntity<Void> createChat(@AuthenticationPrincipal UserInfoDetails userDetails,
                                                @RequestParam Long secondUserId) throws EntityNotFoundException {
+
+        for ( Chat chat: userDetails.getUser().getChats()) {
+            for (User user: chat.getUsers()) {
+                if (user.getId().equals(secondUserId)) {
+                    return ResponseEntity.status(409).build();
+                }
+            }
+        }
         chatService.createChat(userDetails.getUser(), userService.getUserById(secondUserId));
         return ResponseEntity.ok().build();
     }
