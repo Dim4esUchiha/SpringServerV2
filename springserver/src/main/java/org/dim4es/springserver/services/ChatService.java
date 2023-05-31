@@ -1,6 +1,7 @@
 package org.dim4es.springserver.services;
 
 import org.dim4es.springserver.models.Chat;
+import org.dim4es.springserver.models.User;
 import org.dim4es.springserver.repositories.ChatRepository;
 import org.dim4es.springserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,17 @@ public class ChatService {
 
     public List<Chat> getAllUserChats(Long id){
         return userRepository.findById(id).get().getChats();
+    }
+
+    public void createChat(User user, User contactUser) {
+        Chat chat = new Chat();
+        chat.setChatName(contactUser.getNickname());
+        Chat bufferChat = chatRepository.save(chat);
+
+        user.getChats().add(bufferChat);
+        userRepository.save(user);
+
+        contactUser.getChats().add(bufferChat);
+        userRepository.save(contactUser);
     }
 }

@@ -15,8 +15,12 @@ public class Chat extends AbstractEntity {
     @OneToMany(mappedBy = "chatOwner")
     private List<Message> messages;
 
-    @ManyToMany(mappedBy = "chats")
-    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_chat",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "chat_id")
+    )
     private List<User> users;
 
     public Chat() {
