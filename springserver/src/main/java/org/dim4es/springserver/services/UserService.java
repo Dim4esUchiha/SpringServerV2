@@ -70,4 +70,8 @@ public class UserService {
     }
 
     public List<User> findUsersByCity(City city) { return userRepository.findByCity(city);}
+
+    public List<User> findByCountry(String countryName) {
+        return userRepository.findByCountry(countryName);
+    }
 }

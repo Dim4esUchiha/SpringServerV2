@@ -25,17 +25,16 @@ public class UserController {
     }
 
     @GetMapping(path = "/getUsersByLocation")
-    public ResponseEntity<List<UserDto>> getTopTenUsersByLocation(@AuthenticationPrincipal UserInfoDetails details, @RequestParam int radius) {
+    public ResponseEntity<List<UserDto>> getUsersByFilterValues(@AuthenticationPrincipal UserInfoDetails details,
+                                                                @RequestParam int radius,
+                                                                @RequestParam(required = false) String country) {
         String locationToCompare = details.getUser().getLastLocation();
         String[] coordinates = Utils.parseCoordinates(locationToCompare);
         double latitudeToCompare = Double.parseDouble(coordinates[0]);
         double longitudeToCompare = Double.parseDouble(coordinates[1]);
         List<User> users;
-        if (details.getUser().getCity() != null) {
-            users = userService.findUsersByCity(details.getUser().getCity());
-            if (users.isEmpty()) {
-                users = userService.getAllUsers();
-            }
+        if (country != null) {
+            users = userService.findByCountry(country);
         } else {
             users = userService.getAllUsers();
         }
@@ -43,15 +42,12 @@ public class UserController {
         for (User user : users) {
             if (!user.getId().equals(details.getUser().getId())) {
                 String location = user.getLastLocation();
-                String[] coordinatesOfLocation = location.split(" ");
+                String[] coordinatesOfLocation = Utils.parseCoordinates(location);
                 double latitude = Double.parseDouble(coordinatesOfLocation[0]);
                 double longitude = Double.parseDouble(coordinatesOfLocation[1]);
                 long distance = (long) haversine(latitudeToCompare, longitudeToCompare, latitude, longitude);
                 if (distance <= radius) {
                     nearFoundedUsers.add(new UserDto(user.getId(), user.getNickname(), distance));
-//                if(nearFoundedUsers.size() >= 10) {
-//                    break;
-//                }
                 }
             }
         }
