@@ -1,13 +1,13 @@
 package org.dim4es.springserver.config;
 
-import org.dim4es.springserver.security.UserDetailsServiceImpl;
-import org.dim4es.springserver.security.filter.JwtAuthenticationFilter;
-import org.dim4es.springserver.security.jwt.JwtService;
-import org.dim4es.springserver.security.provider.DbAuthenticationProvider;
-import org.dim4es.springserver.security.provider.JwtAuthenticationProvider;
-import org.dim4es.springserver.services.UserInfoDetailsService;
-import org.dim4es.springserver.services.UserService;
-import org.dim4es.springserver.services.token.TokenService;
+import org.dim4es.springserver.service.UserInfoDetailsService;
+import org.dim4es.springserver.service.token.TokenService;
+import org.dim4es.springserver.service.user.UserService;
+import org.dim4es.springserver.web.security.UserDetailsServiceImpl;
+import org.dim4es.springserver.web.security.filter.JwtAuthenticationFilter;
+import org.dim4es.springserver.web.security.jwt.JwtService;
+import org.dim4es.springserver.web.security.provider.DbAuthenticationProvider;
+import org.dim4es.springserver.web.security.provider.JwtAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

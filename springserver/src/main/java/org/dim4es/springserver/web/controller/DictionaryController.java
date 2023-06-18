@@ -1,7 +1,7 @@
 package org.dim4es.springserver.web.controller;
 
 import org.dim4es.springserver.dto.CountryDto;
-import org.dim4es.springserver.services.country.CountryService;
+import org.dim4es.springserver.service.country.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
