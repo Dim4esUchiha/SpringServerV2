@@ -1,7 +1,7 @@
 package org.dim4es.springserver.web;
 
-import org.dim4es.springserver.services.exception.EntityNotFoundException;
-import org.dim4es.springserver.services.exception.UnprocessableEntityException;
+import org.dim4es.springserver.service.exception.EntityNotFoundException;
+import org.dim4es.springserver.service.exception.UnprocessableEntityException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

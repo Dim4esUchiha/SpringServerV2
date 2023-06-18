@@ -1,9 +1,10 @@
 package org.dim4es.springserver.dto;
 
-import org.dim4es.springserver.models.User;
+import org.dim4es.springserver.model.User;
 
 public class AuthUserDto {
 
+    private Long id;
     private String email;
     private String username;
     private String token;
@@ -12,15 +13,25 @@ public class AuthUserDto {
     }
 
     public AuthUserDto(User user, String token) {
-        this.email = user.getEmail();
-        this.username = user.getNickname();
+        id = user.getId();
+        email = user.getEmail();
+        username = user.getUsername();
         this.token = token;
     }
 
-    public AuthUserDto(String email, String username, String token) {
+    public AuthUserDto(Long id, String email, String username, String token) {
+        this.id = id;
         this.email = email;
         this.username = username;
         this.token = token;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {

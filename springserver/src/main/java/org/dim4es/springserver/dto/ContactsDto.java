@@ -1,20 +1,18 @@
 package org.dim4es.springserver.dto;
 
-import org.dim4es.springserver.models.User;
-
 import java.util.List;
 
 public class ContactsDto {
 
     private Long chatId;
     private String chatName;
-    List<UserDto> usersWithoutAuthenticatedUser;
+    List<UserNearbyDto> usersWithoutAuthenticatedUser;
 
     public ContactsDto () {
 
     }
 
-    public ContactsDto(Long chatId, String chatName, List<UserDto> usersWithoutAuthenticatedUser) {
+    public ContactsDto(Long chatId, String chatName, List<UserNearbyDto> usersWithoutAuthenticatedUser) {
         this.chatId = chatId;
         this.chatName = chatName;
         this.usersWithoutAuthenticatedUser = usersWithoutAuthenticatedUser;
@@ -36,11 +34,11 @@ public class ContactsDto {
         this.chatName = chatName;
     }
 
-    public List<UserDto> getUsersWithoutAuthenticatedUser() {
+    public List<UserNearbyDto> getUsersWithoutAuthenticatedUser() {
         return usersWithoutAuthenticatedUser;
     }
 
-    public void setUsersWithoutAuthenticatedUser(List<UserDto> usersWithoutAuthenticatedUser) {
+    public void setUsersWithoutAuthenticatedUser(List<UserNearbyDto> usersWithoutAuthenticatedUser) {
         this.usersWithoutAuthenticatedUser = usersWithoutAuthenticatedUser;
     }
 }
