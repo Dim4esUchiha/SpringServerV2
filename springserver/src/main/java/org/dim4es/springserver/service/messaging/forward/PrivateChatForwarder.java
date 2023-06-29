@@ -18,14 +18,14 @@ import java.util.Optional;
 import static org.dim4es.springserver.service.Constants.DESTINATION_PREFIX_USERS;
 
 @Component
-public class PrivateChatMessageForwarder implements MessageForwarder {
+public class PrivateChatForwarder implements MessageForwarder {
 
     private final UserPrivateChatRepository userPrivateChatRepository;
     private final SimpMessagingTemplate messagingTemplate;
 
     @Autowired
-    public PrivateChatMessageForwarder(UserPrivateChatRepository userPrivateChatRepository,
-                                       SimpMessagingTemplate messagingTemplate) {
+    public PrivateChatForwarder(UserPrivateChatRepository userPrivateChatRepository,
+                                SimpMessagingTemplate messagingTemplate) {
         this.userPrivateChatRepository = userPrivateChatRepository;
         this.messagingTemplate = messagingTemplate;
     }

@@ -1,7 +1,7 @@
 package org.dim4es.springserver.web.listener;
 
 import org.dim4es.springserver.model.UserStatus;
-import org.dim4es.springserver.service.messaging.MessageHandler;
+import org.dim4es.springserver.service.messaging.handler.UserStatusChangeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -12,18 +12,18 @@ import java.security.Principal;
 @Component
 public class StompSessionConnectedListener implements ApplicationListener<SessionConnectedEvent> {
 
-    private final MessageHandler messageHandler;
+    private final UserStatusChangeHandler userStatusChangeHandler;
 
     @Autowired
-    public StompSessionConnectedListener(MessageHandler messageHandler) {
-        this.messageHandler = messageHandler;
+    public StompSessionConnectedListener(UserStatusChangeHandler handler) {
+        userStatusChangeHandler = handler;
     }
 
     @Override
     public void onApplicationEvent(SessionConnectedEvent event) {
         Principal user = event.getUser();
         if (user != null) {
-            messageHandler.handleUserStatusChange(user.getName(), UserStatus.ONLINE);
+            userStatusChangeHandler.handle(new UserStatusChange(user.getName(), UserStatus.ONLINE));
         }
     }
 }

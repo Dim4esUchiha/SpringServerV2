@@ -1,6 +1,6 @@
 package org.dim4es.springserver.dto.messaging;
 
-public class MessageReadMarkDto {
+public class MessageReadMarkDto extends AbstractMessageToHandle {
 
     private Long chatId;
     private Long fromUserId;
