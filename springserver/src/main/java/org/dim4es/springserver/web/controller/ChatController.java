@@ -30,8 +30,8 @@ public class ChatController {
 
     @PostMapping("/createPrivateChat")
     public ResponseEntity<Void> createPrivateChat(@AuthenticationPrincipal UserInfoDetails userDetails,
-                                                  @RequestBody CreatePrivateChatDto createChatDto) throws EntityNotFoundException,
-            UnprocessableEntityException {
+                                                  @RequestBody CreatePrivateChatDto createChatDto)
+            throws EntityNotFoundException, UnprocessableEntityException {
 
         chatService.createPrivateChat(userDetails.getUser().getId(), createChatDto.getUserId());
         return ResponseEntity.ok().build();
@@ -62,5 +62,4 @@ public class ChatController {
         ChatMessagesInfo info = messageService.getChatMessagesInfo(chatId, userDetails.getUser().getId(), timestamp);
         return ResponseEntity.ok(info);
     }
-
 }

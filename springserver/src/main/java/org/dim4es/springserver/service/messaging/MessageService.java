@@ -18,5 +18,4 @@ public interface MessageService {
     List<PrivateChatMessageDto> getMessagesAfterTimestamp(Long userId, long chatId, Long timestamp, Pageable pageable);
 
     ChatMessagesInfo getChatMessagesInfo(long chatId, long userId, Long timestamp) throws EntityNotFoundException;
-
 }

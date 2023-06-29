@@ -2,7 +2,8 @@ package org.dim4es.springserver.web.controller;
 
 import org.dim4es.springserver.dto.messaging.IncomingMessageDto;
 import org.dim4es.springserver.dto.messaging.MessageReadMarkDto;
-import org.dim4es.springserver.service.messaging.MessageHandler;
+import org.dim4es.springserver.service.messaging.handler.IncomingMessageHandler;
+import org.dim4es.springserver.service.messaging.handler.MessageReadNotificationHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
@@ -10,20 +11,23 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MessageController {
 
-    private final MessageHandler messageHandler;
+    private final IncomingMessageHandler incomingMessageHandler;
+    private final MessageReadNotificationHandler messageReadHandler;
 
     @Autowired
-    public MessageController(MessageHandler messageHandler) {
-        this.messageHandler = messageHandler;
+    public MessageController(IncomingMessageHandler incomingMessageHandler,
+                             MessageReadNotificationHandler messageReadHandler) {
+        this.incomingMessageHandler = incomingMessageHandler;
+        this.messageReadHandler = messageReadHandler;
     }
 
     @MessageMapping("/messages")
     public void handleIncomingMessage(IncomingMessageDto messageDto) {
-        messageHandler.handleIncomingMessage(messageDto);
+        incomingMessageHandler.handle(messageDto);
     }
 
     @MessageMapping("/messages/read")
     public void handleMessageRead(MessageReadMarkDto messageReadDto) {
-        messageHandler.handleMessageRead(messageReadDto);
+        messageReadHandler.handle(messageReadDto);
     }
 }
